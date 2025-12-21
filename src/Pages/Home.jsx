@@ -51,7 +51,7 @@ export default function Home() {
       try {
         const res = await getAllPosts();
         if (!mounted) return;
-       
+        console.log(res)
         const normalized = (res.data.data || []).map((p) => ({
           ...p,
           id: p.id || p._id || String(Math.random()),
