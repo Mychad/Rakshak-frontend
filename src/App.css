@@ -38,3 +38,14 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: #059669; /* darker emerald on hover */
 }
+/* move leaflet bottom-right controls (zoom) up so they don't get clipped */
+.leaflet-bottom.leaflet-right .leaflet-control-zoom {
+  bottom: 3rem; /* adjust this value as needed (rem works well with tailwind spacing) */
+  right: 1rem;    /* keep a little horizontal spacing from the edge */
+  z-index: 1001;  /* above the map overlays */
+}
+
+/* optional: slightly raise all bottom-left controls if needed */
+.leaflet-bottom.leaflet-left .leaflet-control {
+  bottom: 5.5rem; /* tweak if any left-side controls overlap your UI */
+}
