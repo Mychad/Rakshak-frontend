@@ -9,6 +9,11 @@ import {
   ZoomControl,
   useMap,
 } from "react-leaflet";
+import L from "leaflet";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
 import {
   MapPin,
   Loader2,
@@ -21,12 +26,25 @@ import {
   X,
 } from "lucide-react";
 import "leaflet/dist/leaflet.css";
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: markerIcon2x,
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
+
 /* ---------- Static list of major Mumbai areas with accurate radii ---------- */
 const STATIC_AREAS = [
   { name: "colaba", coords: [18.911, 72.814], count: 0, baseRadius: 1200 },
   { name: "churchgate", coords: [18.936, 72.828], count: 0, baseRadius: 800 },
   { name: "grant road", coords: [18.975, 72.825], count: 0, baseRadius: 900 },
-  { name: "charni road", coords: [18.9586, 72.8126], count: 0, baseRadius: 700 },
+  {
+    name: "charni road",
+    coords: [18.9586, 72.8126],
+    count: 0,
+    baseRadius: 700,
+  },
   { name: "byculla", coords: [18.989, 72.844], count: 0, baseRadius: 1500 },
   { name: "mazgaon", coords: [18.956, 72.84], count: 0, baseRadius: 1100 },
   { name: "pydhonie", coords: [18.952, 72.833], count: 0, baseRadius: 600 },
@@ -503,7 +521,7 @@ export default function Map() {
         )}
       </div>
 
-      {/* Enhanced Location Info */}
+      {/* Enhanced Location Info  */}
       <div className="absolute bottom-4 left-4 z-[1000] bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 py-3 rounded-xl shadow-2xl border border-blue-500">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-white/20 rounded-lg">
