@@ -182,7 +182,7 @@ function RecenterButton({ center }) {
   return (
     <button
       onClick={() => map.setView(center, 11, { animate: true })}
-      className="absolute bottom-24 right-4 z-[1000] bg-slate-800 hover:bg-slate-700 text-white p-4 rounded-xl shadow-2xl transition-all hover:scale-110 border border-slate-600"
+      className="absolute bottom-35 right-4 z-[1000] bg-slate-800 hover:bg-slate-700 text-white p-4 rounded-xl shadow-2xl transition-all hover:scale-110 border border-slate-600"
       title="Recenter Map"
     >
       <Navigation className="w-6 h-6" />
@@ -522,7 +522,8 @@ export default function Map() {
       </div>
 
       {/* Enhanced Location Info  */}
-      <div className="absolute bottom-4 left-4 z-[1000] bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 py-3 rounded-xl shadow-2xl border border-blue-500">
+      {/* Enhanced Location Info  */}
+      <div className="absolute bottom-22 left-4 z-[1000] bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 py-3 rounded-xl shadow-2xl border border-blue-500">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-white/20 rounded-lg">
             <MapPin className="w-5 h-5" />
