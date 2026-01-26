@@ -46,6 +46,7 @@ export default function Navbar() {
     { to: "/map", icon: <Map className="w-5 h-5" />, label: "Map" },
     { to: "/post/add", icon: <Plus className="w-5 h-5" />, label: "Add Post" },
     { to: "/profile", icon: <User className="w-5 h-5" />, label: "Profile" },
+    { to: "/crime", icon: <FileText className="w-5 h-5" />, label: "Crime Reports" },
   ];
 
   const isActive = (path) =>
@@ -118,16 +119,7 @@ export default function Navbar() {
             </div>
 
             {/* Right side: search + auth + mobile toggle */}
-            <div className="flex items-center gap-3">
-              <div className="hidden sm:flex items-center bg-white/6 rounded-full px-2 py-1">
-                <SearchIcon className="w-4 h-4 text-white/70 mr-2" />
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search..."
-                  className="bg-transparent outline-none text-sm text-white/90 w-48"
-                />
-              </div>
+            <div className="flex items-end justify-end">
 
               <button
                 onClick={handleAuth}

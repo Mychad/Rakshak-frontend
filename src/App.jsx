@@ -12,6 +12,7 @@ import AddPost from "./Pages/AddPost";
 import ProfileEditForm from "./Pages/ProfileEdit";
 import EditPost from "./Pages/EditPost";
 import Map from "./Pages/Map"
+import CrimeReports from "./Pages/CrimeReports";
 
 function AppLayout() {
   const location = useLocation();
@@ -54,6 +55,10 @@ function AppLayout() {
             <Route
               path="/profile/edit/:id?"
               element={<ProtectedRoute><ProfileEditForm /></ProtectedRoute>}
+            />
+            <Route
+              path="/crime"
+              element={<CrimeReports />}
             />
           </Routes>
         </div>

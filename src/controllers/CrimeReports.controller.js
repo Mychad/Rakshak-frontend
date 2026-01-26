@@ -1,7 +1,7 @@
 import ApiClient from "../ApiClient.js"
-export const getAllCrimeLocation = async () =>{
+export const getAllCrimeReports = async () =>{
  try{
-    const res = await ApiClient.get('/map/getAllCrimeLocation')
+    const res = await ApiClient.get('/crimeReports/getAllCrimeReports')
     return {success : true, data : res.data}
  }
  catch(err){

@@ -18,7 +18,7 @@ import {
   Share2,
   Clock,
 } from "lucide-react";
-
+import { getUserProfileWithUser } from "../controllers/Profile.controller";
 // Helper for post type color
 const getPostTypeColor = (type) => {
   switch ((type || "").toLowerCase()) {
@@ -43,6 +43,7 @@ export default function Home() {
   const [error, setError] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [isDownvoted, setIsDownvoted] = useState(false);
+  const [user,setUser] = useState(null)
   useEffect(() => {
     let mounted = true;
     const fetchPosts = async () => {
@@ -85,11 +86,39 @@ export default function Home() {
         setLoading(false);
       }
     };
+    const fetchUser = async () => {
+          const res = await getUserProfileWithUser();
+          const { user } = res.data;
+          setUser({
+            _id: user._id,
+            name: user.name,
+            userId: user.userId,
+            profilePic: user.profilePic,
+          });
+        };
     fetchPosts();
+    fetchUser()
     return () => {
       mounted = false;
     };
   }, []);
+
+  useEffect(() => {
+  if (!user || posts.length === 0) return;
+
+  setPosts((prev) =>
+    prev.map((p) => ({
+      ...p,
+      isLiked: p.likes?.users?.some(
+        (uid) => uid.toString() === user._id.toString()
+      ),
+      isDownvoted: p.downVotes?.users?.some(
+        (uid) => uid.toString() === user._id.toString()
+      ),
+    }))
+  );
+}, [user]);
+
 
   const handleLike = async (postId) => {
     // optimistic update
@@ -248,10 +277,12 @@ export default function Home() {
 
         {!loading &&
           filtered.map((post) => (
+            
             <div
               key={post._id}
               className="cursor-pointer transform transition-all hover:scale-[1.01]"
             >
+              
               <div
                 className="backdrop-blur-xl bg-white/6 border border-white/10 rounded-3xl overflow-hidden my-6
                       transition-all duration-300 ease-out 
@@ -308,11 +339,11 @@ export default function Home() {
                           : "rgba(59,130,246,0.95)",
                       color: "#fff",
                     }}
-                  >
+                  >   
                     {post.type}
                   </div>
                 </div>
-                {console.log(post)}
+                
                 {/* Post Text */}
                 <div className="p-4 pt-3">
                   <p className="text-white/90 leading-relaxed">
@@ -349,11 +380,12 @@ export default function Home() {
                           }}
                           className="p-1 rounded-full transition-colors duration-200"
                         >
-                          <ArrowBigUp
+                          
+                          <Heart
                             className={`w-6 h-6 transition-colors ${
                                 post.isLiked
-                                  ? "fill-green-500 text-green-500"
-                                  : "text-white/70 hover:text-green-400"
+                                  ? "fill-red-700 text-red-700"
+                                  : "text-white/70 hover:text-red-400"
                               }`}
                           />
                         </button>
